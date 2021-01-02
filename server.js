@@ -33,7 +33,7 @@ async function updateBody(data) {
 	try {
 		/* 
 			calculate ups and downs based on post ratio
-			source: @jawawizard
+			source: @javawizard
 			https://www.reddit.com/r/javascript/comments/kp2c1l/statistics_for_this_post_are_updated_real_time_in/ghv4qaj?utm_source=share&utm_medium=web2x&context=3
 		*/
 		const all_votes = Math.round(
