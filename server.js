@@ -31,15 +31,22 @@ async function getData() {
 
 async function updateBody(data) {
 	try {
-		// calculate downs based on allvotes and upvotes
-		const all_votes = Math.round((data.ups / (data.ratio * 100)) * 100);
-		const downs = all_votes - data.ups;
+		/* 
+			calculate ups and downs based on post ratio
+			source: @jawawizard
+			https://www.reddit.com/r/javascript/comments/kp2c1l/statistics_for_this_post_are_updated_real_time_in/ghv4qaj?utm_source=share&utm_medium=web2x&context=3
+		*/
+		const all_votes = Math.round(
+			data.score / (data.ratio - (1 - data.ratio))
+		);
+		const app_ups = Math.round(all_votes * data.ratio);
+		const app_downs = Math.round(all_votes * (1 - data.ratio));
 
 		const response = await requester.getComment(COMMENT_ID).edit(
 			`## This post currently have:
 - score: ${data.score}
-- up(s): ${data.ups}
-- approximate down(s):  ${downs}
+- approximate up(s): ${app_ups}
+- approximate down(s):  ${app_downs}
 - ratio: ${data.ratio}
 - award(s): ${data.total_awards}
 - comment(s): ${data.comments}`
