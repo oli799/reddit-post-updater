@@ -1,4 +1,4 @@
-var snoowrap = require('snoowrap');
+const snoowrap = require('snoowrap');
 require('dotenv').config();
 
 const POST_ID = 'your_post_id';
@@ -31,10 +31,15 @@ async function getData() {
 
 async function updateBody(data) {
 	try {
+		// calculate downs based on allvotes and upvotes
+		const all_votes = Math.round((data.ups / (data.ratio * 100)) * 100);
+		const downs = all_votes - data.ups;
+
 		const response = await requester.getComment(COMMENT_ID).edit(
 			`## This post currently have:
 - score: ${data.score}
 - up(s): ${data.ups}
+- approximate down(s):  ${downs}
 - ratio: ${data.ratio}
 - award(s): ${data.total_awards}
 - comment(s): ${data.comments}`
