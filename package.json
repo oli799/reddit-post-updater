@@ -1,0 +1,20 @@
+{
+	"name": "reddit-post-updater",
+	"version": "1.0.0",
+	"description": "update reddit post every 5sec",
+	"main": "server.js",
+	"scripts": {
+		"dev": "npx nodemon server.js",
+		"start": "node server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.6"
+	},
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"snoowrap": "^1.22.0"
+	}
+}
