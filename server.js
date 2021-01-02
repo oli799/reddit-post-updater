@@ -2,6 +2,7 @@ var snoowrap = require('snoowrap');
 require('dotenv').config();
 
 const POST_ID = 'your_post_id';
+const COMMENT_ID = 'your_comment_id';
 
 const requester = new snoowrap({
 	userAgent: process.env.REDDIT_USER_AGENT,
@@ -18,7 +19,6 @@ async function getData() {
 		return {
 			score: parsedSubmission.score,
 			ups: parsedSubmission.ups,
-			downs: parsedSubmission.downs,
 			ratio: parsedSubmission.upvote_ratio,
 			comments: parsedSubmission.num_comments,
 			reports: parsedSubmission.num_reports,
@@ -31,15 +31,13 @@ async function getData() {
 
 async function updateBody(data) {
 	try {
-		const response = await requester.getSubmission(POST_ID).edit(
+		const response = await requester.getComment(COMMENT_ID).edit(
 			`## This post currently have:
 - score: ${data.score}
 - up(s): ${data.ups}
-- down(s): ${data.downs}
 - ratio: ${data.ratio}
 - award(s): ${data.total_awards}
-- comment(s): ${data.comments}
-- report(s): ${data.reports}`
+- comment(s): ${data.comments}`
 		);
 
 		return response;
