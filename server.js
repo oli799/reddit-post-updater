@@ -1,8 +1,8 @@
 const snoowrap = require('snoowrap');
 require('dotenv').config();
 
-const POST_ID = 'your_post_id';
-const COMMENT_ID = 'your_comment_id';
+const POST_ID = process.env.POST_ID;
+const COMMENT_ID = process.env.COMMENT_ID;
 
 const requester = new snoowrap({
 	userAgent: process.env.REDDIT_USER_AGENT,
@@ -43,13 +43,13 @@ async function updateBody(data) {
 		const app_downs = Math.round(all_votes * (1 - data.ratio));
 
 		const response = await requester.getComment(COMMENT_ID).edit(
-			`## This post currently have:
+			`## This post currently has:
 - score: ${data.score}
-- approximate up(s): ${app_ups}
-- approximate down(s):  ${app_downs}
+- approximate ups: ${app_ups}
+- approximate downs:  ${app_downs}
 - ratio: ${data.ratio}
-- award(s): ${data.total_awards}
-- comment(s): ${data.comments}`
+- awards: ${data.total_awards}
+- comments: ${data.comments}`
 		);
 
 		return response;
@@ -64,8 +64,8 @@ async function updateBody(data) {
 		const data = await getData();
 		const response = await updateBody(data);
 
-		if (response.json.errors.length === 0) {
-			console.log('Post updated successfully at: ', new Date());
+		if (response && response.json.errors.length === 0) {
+			//console.log('Post updated successfully at: ', new Date());
 		} else {
 			console.log(
 				'Post update failed while updating body: ',
