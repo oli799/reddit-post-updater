@@ -65,7 +65,7 @@ async function updateBody(data) {
 		const response = await updateBody(data);
 
 		if (response && response.json.errors.length === 0) {
-			//console.log('Post updated successfully at: ', new Date());
+			console.log('Post updated successfully at: ', new Date());
 		} else {
 			console.log(
 				'Post update failed while updating body: ',
