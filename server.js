@@ -58,19 +58,17 @@ async function updateBody(data) {
 	}
 }
 
-(async function () {
-	// update post every 5 seconds
-	setInterval(async function () {
-		const data = await getData();
-		const response = await updateBody(data);
+// update post every 5 seconds
+setInterval(async function () {
+	const data = await getData();
+	const response = await updateBody(data);
 
-		if (response && response.json.errors.length === 0) {
-			console.log('Post updated successfully at: ', new Date());
-		} else {
-			console.log(
-				'Post update failed while updating body: ',
-				response.json.errors
-			);
-		}
-	}, 5000);
-})();
+	if (response && response.json.errors.length === 0) {
+		console.log('Post updated successfully at: ', new Date());
+	} else {
+		console.log(
+			'Post update failed while updating body: ',
+			response.json.errors
+		);
+	}
+}, 5000);
