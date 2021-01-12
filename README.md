@@ -1,5 +1,7 @@
 # Reddit "realtime" post stat updater
 
+Try it: https://www.reddit.com/r/javascript/comments/kp2c1l/statistics_for_this_post_are_updated_real_time_in/
+
 ## 🏃 Getting Started
 
 1.  Make your copy from **.env.example**.
